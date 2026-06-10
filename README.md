@@ -1,25 +1,25 @@
 # find-the-small-forsigma
 
-Beam search for the smallest positive integer \(n\) such that
+Beam search for the smallest positive integer $n$ such that
 
-\[
+$$
 \sigma(an+1) > \sigma(an)
-\]
+$$
 
-for squarefree moduli \(a = 30, 42, 70\).
+for squarefree moduli $a = 30, 42, 70$.
 
 This repository accompanies the paper  
-**"The Smallest Solution of \(\sigma(an+1) > \sigma(an)\) for \(a = 30, 42,\) and \(70\)".**
+**"The Smallest Solution of $\sigma(an+1) > \sigma(an)$ for $a = 30, 42,$ and $70$".**
 
 ## Results
 
-| \(a\) | Blocked primes | Gap | Smallest \(n\) | Digits | \(\frac{\sigma(an+1)}{\sigma(an)}\) |
-|-------|---------------|-----|----------------|--------|-------------------------------------|
-| 30    | {2,3,5}       | —   | 1.3032×10⁶⁴    | 65     | 1.00167                             |
-| 42    | {2,3,7}       | 5   | 6.6874×10⁴¹    | 42     | 1.01111                             |
-| 70    | {2,5,7}       | 3   | 48,049,097     | 8      | 1.00767                             |
+| $a$ | Blocked primes | Gap | Smallest $n$ | Digits | $\dfrac{\sigma(an+1)}{\sigma(an)}$ |
+|-----|---------------|-----|-------------|--------|-------------------------------------|
+| 30  | {2,3,5}       | —   | $1.3032\times10^{64}$ | 65 | 1.00167 |
+| 42  | {2,3,7}       | 5   | $6.6874\times10^{41}$ | 42 | 1.01111 |
+| 70  | {2,5,7}       | 3   | 48,049,097   | 8  | 1.00767 |
 
-Having a *gap prime* dramatically reduces the size of the smallest \(n\).
+Having a *gap prime* dramatically reduces the size of the smallest $n$.
 
 ## Repository Structure
 
@@ -28,18 +28,16 @@ find-the-small-forsigma/
 ├── README.md
 ├── LICENSE
 ├── .gitignore
-├── paper/
-│   └── paper.tex                      # LaTeX source of the paper
 ├── src/
-│   └── beam_search.py                 # Beam search implementation
-├── results/
-│   ├── 30/
-│   │   ├── candidate_summary.md
-│   │   └── minimality_proof.md
-│   ├── 42/
-│   │   └── candidate_summary.md
-│   └── 70/
-│       └── candidate_summary.md
+│   └── beam_search.py
+└── results/
+    ├── 30/
+    │   ├── candidate_summary.md
+    │   └── minimality_proof.md
+    ├── 42/
+    │   └── candidate_summary.md
+    └── 70/
+        └── candidate_summary.md
 ```
 
 ## Reproducing the Results
@@ -74,11 +72,11 @@ for z, fac in candidates:
 
 ### Parameters used in the paper
 
-| \(a\) | \(Z_{\max}\) | \(K\) | \(p_{\max}\) | \(\lambda\) |
-|-------|-------------|-------|-------------|------------|
-| 30    | \(10^{80}\) | 2000  | 300         | 0.0002     |
-| 42    | \(10^{44}\) | 2000  | 300         | 0.0001     |
-| 70    | \(10^{11}\) | 2000  | 200         | 0.0002     |
+| $a$ | $Z_{\max}$ | $K$  | $p_{\max}$ | $\lambda$ |
+|-----|------------|------|------------|-----------|
+| 30  | $10^{80}$  | 2000 | 300        | 0.0002    |
+| 42  | $10^{44}$  | 2000 | 300        | 0.0001    |
+| 70  | $10^{11}$  | 2000 | 200        | 0.0002    |
 
 ## Citation
 
