@@ -3,42 +3,18 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
 *.egg-info/
-.installed.cfg
+build/
+dist/
 *.egg
+*.so
 
 # Virtual environments
 .venv/
 venv/
-ENV/
 env/
 
-# IDE / Editor
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-*.sublime-*
-
-# OS
-.DS_Store
-Thumbs.db
-
-# LaTeX / PDF build artifacts
+# LaTeX build artifacts
 *.aux
 *.log
 *.out
@@ -48,54 +24,28 @@ Thumbs.db
 *.synctex.gz
 *.bbl
 *.blg
-*.bcf
 *.run.xml
-*.xdv
-*.nav
-*.snm
-*.vrb
-*.lot
-*.lof
-*.lof
-*.idx
-*.ilg
-*.ind
 
-# PDF (we only keep the source .tex)
+# PDF (never track in this repo)
 *.pdf
 
-# Data / checkpoint files (large, reproducible)
+# Data / checkpoint files
 *.jsonl
 *.checkpoint*
 *.checkpoint
 primes.json
 
-# Segmented verification reports (hundreds of files, not needed in repo)
-find-the-small-forsigma(30n)/segmented_*/
-find-the-small-forsigma(30n)/segmented_*.md
-find-the-small-forsigma(30n)/segmented_*.json
-find-the-small-forsigma(30n)/run_segmented*.sh
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 
-# Experimental / draft notes
-find-the-small-forsigma(30n)/Experimental*.md
-find-the-small-forsigma(30n)/beam_grid_*.md
-find-the-small-forsigma(30n)/beam_grid_*.json
+# OS
+.DS_Store
+Thumbs.db
 
-# Other modulus experiments (not part of this paper)
-find-the-small-forsigma(6n)/
-find-the-small-forsigma(10n)/
-find-the-small-forsigma(14n)/
-find-the-small-forsigma(15n)/
-find-the-small-forsigma(22n)/
-find-the-small-forsigma(42n)/
-find-the-small-forsigma(70n)/
-
-# Workspace / temporary
-find-the-small-forsigma.code-workspace
+# Temporary files
 *.tmp
 *.bak
-
-# Test / batch output
-sigma_*_batch_summary*.json
-sigma_*_batch_summary*.md
-test_*.py

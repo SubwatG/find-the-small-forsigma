@@ -1,68 +1,98 @@
 # find-the-small-forsigma
 
 Beam search for the smallest positive integer \(n\) such that
+
 \[
 \sigma(an+1) > \sigma(an)
 \]
+
 for squarefree moduli \(a = 30, 42, 70\).
 
-This repository contains the code and results accompanying the paper
-**"The Smallest Solution of \(\sigma(an+1) > \sigma(an)\) for \(a = 30, 42,\) and \(70\)"**.
+This repository accompanies the paper  
+**"The Smallest Solution of \(\sigma(an+1) > \sigma(an)\) for \(a = 30, 42,\) and \(70\)".**
 
-## Main Results
+## Results
 
-| \(a\) | Blocked primes | Gap prime | Smallest \(n\) | Digits | \(\sigma(an+1)/\sigma(an)\) |
-|-------|----------------|-----------|----------------|--------|-----------------------------|
-| 30    | \{2,3,5\}      | —         | 1.303×10⁶⁴     | 65     | 1.00167                     |
-| 42    | \{2,3,7\}      | 5         | 6.687×10⁴¹     | 42     | 1.01111                     |
-| 70    | \{2,5,7\}      | 3         | 48 049 097     | 8      | 1.00767                     |
+| \(a\) | Blocked primes | Gap | Smallest \(n\) | Digits | \(\frac{\sigma(an+1)}{\sigma(an)}\) |
+|-------|---------------|-----|----------------|--------|-------------------------------------|
+| 30    | {2,3,5}       | —   | 1.3032×10⁶⁴    | 65     | 1.00167                             |
+| 42    | {2,3,7}       | 5   | 6.6874×10⁴¹    | 42     | 1.01111                             |
+| 70    | {2,5,7}       | 3   | 48,049,097     | 8      | 1.00767                             |
 
-The dramatic difference in size is explained by the presence or absence of
-**gap primes** — small primes that do not divide \(a\) and can therefore be
-used to construct a highly abundant \(an+1\).
+Having a *gap prime* dramatically reduces the size of the smallest \(n\).
 
 ## Repository Structure
 
 ```
 find-the-small-forsigma/
-├── find-the-small-forsigma(30n)/
-│   ├── hermes_sigma_30n_experiment.py   # Beam search implementation
-│   ├── sigma_30n_first_candidate_summary.md
-│   └── sigma_30n_minimality_proof.md    # Full mathematical proof
-├── sigma_42n_first_candidate_summary.md
-├── sigma_70n_first_candidate_summary.md
-├── paper.tex
-├── paper.pdf
-└── README.md
+├── README.md
+├── LICENSE
+├── .gitignore
+├── paper/
+│   └── paper.tex                      # LaTeX source of the paper
+├── src/
+│   └── beam_search.py                 # Beam search implementation
+├── results/
+│   ├── 30/
+│   │   ├── candidate_summary.md
+│   │   └── minimality_proof.md
+│   ├── 42/
+│   │   └── candidate_summary.md
+│   └── 70/
+│       └── candidate_summary.md
 ```
 
 ## Reproducing the Results
 
-The main script is
-`find-the-small-forsigma(30n)/hermes_sigma_30n_experiment.py`.
+The main script is `src/beam_search.py`.
 
-Typical usage for modulus 30:
+### Prerequisites
+
 ```bash
-python3 hermes_sigma_30n_experiment.py beam-search \
-  --a 30 --ZMAX 1e80 --K 2000 --pmax 300 --lam 0.0002
+pip install sympy
 ```
 
-For other moduli, change the `--a` parameter and adjust `ZMAX` accordingly
-(see Table 1 in the paper).
+### Beam Search (Example for modulus 30)
 
-## License
+```python
+from src.beam_search import beam_search, test_candidate
 
-MIT License
+candidates = beam_search(
+    ZMAX=10**80,
+    K=2000,
+    pmax=300,
+    lam=0.0002,
+    TARGET_M=30,
+    verbose=True
+)
+
+for z, fac in candidates:
+    ok, ratio = test_candidate(z)
+    if ok:
+        print(f"Found: n = {(z-1)//30}, ratio = {ratio}")
+```
+
+### Parameters used in the paper
+
+| \(a\) | \(Z_{\max}\) | \(K\) | \(p_{\max}\) | \(\lambda\) |
+|-------|-------------|-------|-------------|------------|
+| 30    | \(10^{80}\) | 2000  | 300         | 0.0002     |
+| 42    | \(10^{44}\) | 2000  | 300         | 0.0001     |
+| 70    | \(10^{11}\) | 2000  | 200         | 0.0002     |
 
 ## Citation
 
-If you use this code or the results, please cite the accompanying paper:
+If you use this code or the results, please cite:
 
 ```
 K. Subwattanachai,
 "The Smallest Solution of σ(an+1) > σ(an) for a = 30, 42, and 70",
 preprint, 2026.
 ```
+
+## License
+
+MIT License — see [LICENSE](LICENSE).
 
 ## Contact
 
